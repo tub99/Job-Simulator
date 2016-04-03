@@ -3,7 +3,8 @@ function SelfFcfs() {
 	var clock=0,
 		waitingQueue = [],
 		finishedQueue = [],
-		laterQueue=[];
+		laterQueue=[],
+		totalCost=0;
 
 	var processJob = function(job,vmList,ck) {
 		var j,
@@ -15,9 +16,10 @@ function SelfFcfs() {
 				
 				//Allocate job to that vm
 				vm.allocate(job);
-				document.write(job.getId()+" added to "+ vm.getId()+" at clock "+clock + "<br>");
+				document.write("<b>"+job.getId()+"</b> added to <b>"+ vm.getId()+"</b> at clock <b>"+clock + "<br>");
 				job.setIsFinished(true);
 				clock=clock+job.getLength();
+				totalCost+=vm.getVmCost()*job.getLength();
 				//then addJob to finishedQ
 				finishedQueue.push(job);
 				break;
@@ -36,6 +38,11 @@ function SelfFcfs() {
 		}
 		return false;
 
+	};
+	var printTotCost = function() {
+		document.write("--------------------------------------------------"+"<br>");
+		document.write("The total cost for running the Jobs is <b>"+totalCost+"<br>");
+		document.write("--------------------------------------------------");
 	};
 
 	this.simulate = function(jobList,vmList,deadline) {
@@ -56,7 +63,7 @@ function SelfFcfs() {
 			//No VM could be allocated to the job
 			if(flag === false) {
 				clock++;
-				document.write(job.getId()+ " cannot be processed with the existing set of VMList"+"<br>");
+				document.write("<b>"+job.getId()+ "</b> <b>cannot</b> be processed with the existing set of VMList"+"<br>");
 					
 			}
 			// Three conditions for processing the job
@@ -70,7 +77,7 @@ function SelfFcfs() {
 			else {
 				//Updating the clock and adding job to the waiting queue
 				clock++;
-				document.write(job.getId()+" added to waitingQueue at clock"+ clock+"<br>");
+				document.write("<b>"+job.getId()+"</b> added to <b>waitingQueue</b> at clock"+ clock+"<br>");
 				waitingQueue.push(job);	
 						
 			}
@@ -89,7 +96,7 @@ function SelfFcfs() {
 				//No VM could be allocated to the job,remove job from waiting queue
 				if(flag === false) {
 					clock++;
-					document.write(job.getId()+ " cannot be processed with the existing set of VMList"+"<br>");
+					document.write("<b>"+job.getId()+ "</b> <b>cannot</b> be processed with the existing set of VMList"+"<br>");
 					waitingQueue.shift();
 				}
 				// Three conditions for processing the job
@@ -108,7 +115,8 @@ function SelfFcfs() {
 		//Jobs which could not be scheduled within the deadline is still remaining in the waiting queue
 		if(waitingQueue.length>0) {
 			for(var k=0;k<waitingQueue.length;k++)
-				document.write(waitingQueue[k].getId()+" could not be scheduled within the deadline "+deadline+"<br>");
+				document.write("<b>"+waitingQueue[k].getId()+"</b> <b>could not</b> be scheduled within the deadline "+deadline+"<br>");
 		}
+		printTotCost();
 	};
 }
