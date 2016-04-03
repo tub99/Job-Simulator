@@ -9,12 +9,13 @@
 function Job() {
 	var startTime,
 		length,
+		id,
 		arrivalTime,
 		clock=0,
-		id,
 		counter=0,
 		finishedFlag,
 		waititingFlag;
+
 	this.createJob = function(nm,len,aT) {
 		length=len;
 		arrivalTime=aT;

@@ -9,8 +9,8 @@
 */
 function VM() {
 
-	var id,
-		unitCost,
+	var unitCost,
+		id,
 		engaged,
 		allocatedTime,
 		timeLeft,
