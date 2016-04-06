@@ -13,3 +13,6 @@ To start the simulator you need to call *startSimulator()* method of the Simulat
 	simulator.startSimulator();
 ```
 The user can see the output by running the *index.html* file in a web browser.
+
+#Note:
+document.write() has been used just for displaying purpose !
