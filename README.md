@@ -12,7 +12,8 @@ To start the simulator you need to call *startSimulator()* method of the Simulat
   var simulator = new Simulator();
 	simulator.startSimulator();
 ```
-The user can see the output by running the *index.html* file in a web browser.
+<br>
+The output is at : http://tub99.github.io/JobSimulator/index.html
 
 #Note:
 document.write() has been used just for displaying purpose !
